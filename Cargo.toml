@@ -1,0 +1,10 @@
+[package]
+name = "rust_fundamentals1"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jeni Rainer <jenirainer@icloud.com>"]
+description = "A Rust project"
+license = "MIT"
+
+[dependencies]
+tempfile = "3.21.0"
