@@ -10,7 +10,7 @@ use std::io::Write;
 /// Returns a Result indicating success or failure.
 /// # Examples:
 /// ```
-/// use rust_fundamentals1::write_to_file;
+/// use rust_fundamentals1::file_writer::write_to_file;
 /// let path = "output.txt";
 /// let content = "Hello, world!";
 /// write_to_file(path, content).expect("Failed to write to file");

@@ -3,6 +3,7 @@
 //! This function prints the prompt to the console and reads a line of input from the user.
 
 pub mod file_writer;
+pub mod logging_config;
 
 use std::io::BufRead;
 

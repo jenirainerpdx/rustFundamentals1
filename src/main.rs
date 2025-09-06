@@ -1,9 +1,11 @@
 use rust_fundamentals1::{file_writer, get_input};
+use rust_fundamentals1::logging_config::{init_logger, LoggingConfig, LogLevel, LogOutput};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
 fn main() {
-    env_logger::init();
+    let config = setup_logging_config();
+    init_logger(config);
     let filename = get_input("Enter the filename: ");
     log::info!("Attempting to open file: {}", filename);
     let file = File::open(filename);
@@ -54,4 +56,10 @@ fn main() {
     let path = "output.txt";
     let content = "Hello, world!";
     file_writer::write_to_file(path, content).expect("Failed to write to file");
+}
+
+fn setup_logging_config() -> LoggingConfig {
+    let level = LogLevel::Info;
+    let output = LogOutput::Stdout;
+    LoggingConfig::new(level, output)
 }
