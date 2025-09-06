@@ -1,10 +1,39 @@
-use rust_fundamentals1::get_filename;
+/// Simple demo project that reads a filename and then outputs the contents of the file
+/// This is more for exercising pattern matching for error handling.
+///
+use rust_fundamentals1::{file_writer, get_input};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+/// Entry point of the application
+/// # Example:
+/// ```
+/// make run
+/// ... then enter a filename that is on the path
+/// ```
+///
+/// # Panics
+///
+/// This function will panic for the following reasons:
+/// - File not found
+/// - Permission denied
+/// - Invalid inputs
+/// - Some other error in opening the file
+///
+/// # Errors
+///
+/// This function will return an error if:
+/// - There is an unexpecked End of File
+/// - A broken pipe error
+/// - Blocking error
+/// - Time out error
+/// - Interrupted error
+/// - Some other error in reading the file
+///
 fn main() {
-    let filename = get_filename();
-
+    env_logger::init();
+    let filename = get_input("Enter the filename: ");
+    log::info!("Attempting to open file: {}", filename);
     let file = File::open(filename);
     let file = match file {
         Ok(file) => file,
@@ -50,4 +79,8 @@ fn main() {
             },
         }
     }
+let path = "output.txt";
+    let content = "Hello, world!";
+    file_writer::write_to_file(path, content).expect("Failed to write to file");
+
 }
