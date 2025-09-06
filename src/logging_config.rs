@@ -3,6 +3,8 @@
 //! This module provides utilities for configuring logging behavior.
 //! It supports setting log levels and directing log output to various targets
 //! such as stdout, stderr, or a file.
+//! Note: Flexi Logger may support properties-based configuration; consider refactoring to leverage this feature if appropriate.
+// TODO: Evaluate if properties-based config in flexi_logger can simplify or improve this module.
 
 use flexi_logger::{FileSpec, Logger};
 
