@@ -1,5 +1,5 @@
+use rust_fundamentals1::logging_config::{init_logger, LogLevel, LogOutput, LoggingConfig};
 use rust_fundamentals1::{file_writer, get_input};
-use rust_fundamentals1::logging_config::{init_logger, LoggingConfig, LogLevel, LogOutput};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
@@ -9,6 +9,8 @@ fn main() {
     let filename = get_input("Enter the filename: ");
     log::info!("Attempting to open file: {}", filename);
     let file = File::open(filename);
+    log::error!("This is a log line at error level.");
+    log::trace!("This is a log line at trace level.");
     let file = match file {
         Ok(file) => file,
         Err(error) => match error.kind() {
@@ -59,7 +61,7 @@ fn main() {
 }
 
 fn setup_logging_config() -> LoggingConfig {
-    let level = LogLevel::Info;
-    let output = LogOutput::Stdout;
+    let level = LogLevel::Trace;
+    let output = LogOutput::File("app.log".to_string());
     LoggingConfig::new(level, output)
 }
