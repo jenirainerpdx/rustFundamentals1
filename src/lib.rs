@@ -42,3 +42,38 @@ fn _read_stdin<R: BufRead>(reader: &mut R) -> String {
     file_writer::write_to_file(path, content).expect("Failed to write to file");
     read_input.trim().to_string()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::_read_stdin;
+    use std::io::Cursor;
+
+    #[test]
+    fn test_read_stdin() {
+        let input = b"Generally a filename\n";
+        let expected = "Generally a filename";
+        let mut reader = Cursor::new(input);
+        let output = _read_stdin(&mut reader);
+        assert_eq!(output, expected);
+    }
+
+    #[test]
+    fn test_read_stdin_empty() {
+        let input = b"\n";
+        let expected = "";
+        let mut reader = Cursor::new(input);
+        let output = _read_stdin(&mut reader);
+        assert_eq!(output, expected);
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_read_stdin_() {
+        let input = None.unwrap();
+        let mut reader: Cursor<&'static [u8; 1]> = Cursor::new(input);
+        let _output = _read_stdin(&mut reader);
+    }
+
+}
+
+
